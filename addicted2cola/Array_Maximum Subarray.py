@@ -4,13 +4,11 @@
 
 class Solution:
     def maxSubArray(self, nums) -> int:
-        d=[nums[0]] #d[x] = x번째 숫자를 포함하는 부분 행렬 중 최대 합
-
+        d=nums[:] #d[x] = x번째 숫자를 포함하는 부분 행렬 중 최대 합
         for i in range(1,len(nums)):
-            d.append(nums[i])
             d[i] = max(d[i],d[i-1]+nums[i])
         return(max(d))
 
 
-# s=Solution()
-# print(s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+s=Solution()
+print(s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
