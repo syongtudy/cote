@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree
 
 class TreeNode:
     def __init__(self, x):
@@ -29,3 +30,35 @@ root.right = node2
 
 s=Solution()
 print(s.lowestCommonAncestor(root,node1,node2).val)
+
+
+###############
+#잘못됨 리스트가 shallow copy되는듯
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        dic = {}
+        def dfs(cur,route):
+            route.append(cur)
+            dic[cur] = route
+            if cur.left: dfs(cur.left,route)
+            if cur.right: dfs(cur.right,route)
+        dfs(root,[])
+        for i in reversed(dic[p]):
+            for j in reversed(dic[q]):
+                if i!=j: return j
+
+#######################
+# 다른사람 풀이
+# BST이므로 루트부터 내려와서 두 수의 가운데에 끼는 첫 노드가 LCA가 된다 
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        low = min(p.val,q.val)
+        high = max(p.val,q.val)
+
+        while root:
+            if root.val > high:
+                root = root.left
+            elif root.val < low:
+                root = root.right
+            else:
+                return root
