@@ -23,8 +23,8 @@ class MedianFinder:
 
 
 ################
-# O(1)에 찾으려면 c++의 ordered multiset 같은게 필요한데
-
+# O(1)에 찾으려면 c++의 ordered multiset 같은게 필요한데 없는데로 중간까지 다뺴기
+# TLE
 from heapq import heappop, heappush
 class MedianFinder:
 
@@ -50,6 +50,8 @@ class MedianFinder:
 
 
 #####################
+# 현 중간값보다 큰값 작은값을 각각 min,max힙에 넣고 관리
+# 삽입에 최대 O(3logn), 탐색에 O(2)
 from heapq import heappop, heappush
 
 class MedianFinder:
@@ -89,6 +91,5 @@ med.addNum(6)
 print(med.findMedian())
 med.addNum(10)
 print(med.findMedian())
-
 med.addNum(2)
 print(med.findMedian())
